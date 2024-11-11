@@ -70,12 +70,17 @@ variable "vm_cpus" {
   default     = 2
 }
 
+variable "domainname" {
+  type    = string
+  default = "griend.dev"
+}
+
 variable "dns_count" {
   type    = number
   default = 1
 }
 
-variable "domainname" {
-  type    = string
-  default = "griend.dev"
+variable "gitlab_count" {
+  type    = number
+  default = 1
 }
