@@ -1,0 +1,14 @@
+network:
+  version: 1
+  config:
+    - type: physical
+      name: ens3
+      subnets:
+        - type: static
+          ipv4: true
+          address: ${host_ip_address}
+          netmask: 255.255.255.0
+          gateway: ${gateway_ip_address}
+          control: auto
+        - type: nameserver
+          address: ${nameserver_ip_address}
