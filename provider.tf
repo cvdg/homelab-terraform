@@ -20,5 +20,11 @@ terraform {
 }
 
 provider "libvirt" {
-  uri = var.libvirt_uri
+  alias = "srv01"
+  uri   = "qemu+ssh://cees@srv01.griend.dev/system"
+}
+
+provider "libvirt" {
+  alias = "srv02"
+  uri   = "qemu+ssh://cees@srv02.griend.dev/system"
 }

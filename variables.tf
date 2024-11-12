@@ -84,3 +84,8 @@ variable "gitlab_count" {
   type    = number
   default = 1
 }
+
+variable "uninstall" {
+  type    = bool
+  default = false
+}
