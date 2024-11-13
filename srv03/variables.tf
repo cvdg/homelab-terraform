@@ -4,12 +4,6 @@ variable "cloudinit_username" {
   default     = "ansible"
 }
 
-variable "cloudinit_password" {
-  description = "Cloud-init: Password"
-  type        = string
-  default     = null
-}
-
 variable "cloudinit_ssh_public_key" {
   description = "Cloud-init: ssh authorized keys"
   type        = string
@@ -22,22 +16,10 @@ variable "cloudinit_gateway_ip_address" {
   default     = "192.168.2.254"
 }
 
-variable "cloudinit_nameserver_ip_address" {
-  description = "IP address of the nameserver"
-  type        = string
-  default     = "192.168.2.128"
-}
-
 variable "base_img_url" {
   description = "URL to debian cloud img qcow2"
   type        = string
   default     = "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
-}
-
-variable "libvirt_uri" {
-  description = "libvirt_uri"
-  type        = string
-  default     = "qemu+ssh://cees@srv01/system?known_hosts_verify=ignore"
 }
 
 variable "libvirt_pool_name" {
@@ -61,7 +43,7 @@ variable "vm_size" {
 variable "vm_memory" {
   description = "Memory of the VM (2 GiB)"
   type        = number
-  default     = 2 * 1024
+  default     = 1 * 1024
 }
 
 variable "vm_cpus" {
@@ -85,7 +67,8 @@ variable "gitlab_count" {
   default = 1
 }
 
-variable "uninstall" {
+variable "dns02_enabled" {
   type    = bool
-  default = false
+  default = true
 }
+

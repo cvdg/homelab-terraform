@@ -1,48 +1,49 @@
 resource "libvirt_volume" "dns02" {
-  provider       = libvirt.srv02
-  count          = var.uninstall ? 0 : 1
+  count          = var.dns02_enabled ? 1 : 0
   name           = "dns02.qcow2"
-  pool           = libvirt_pool.srv02.name
-  base_volume_id = libvirt_volume.srv02.id
+  pool           = libvirt_pool.pool.name
+  base_volume_id = libvirt_volume.base.id
   size           = var.vm_size
 }
 
+resource "random_password" "dns02_password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
 data "template_file" "dns02_user_data" {
-  count    = var.uninstall ? 0 : 1
+  count    = var.dns02_enabled ? 1 : 0
   template = file("${path.module}/cloud_init.yml")
 
   vars = {
-    vm_hostname              = "dns02.${var.domainname}"
-    cloudinit_username       = var.cloudinit_username
-    cloudinit_password       = var.cloudinit_password
-    cloudinit_ssh_public_key = var.cloudinit_ssh_public_key
+    hostname       = "dns02.${var.domainname}"
+    username       = var.cloudinit_username
+    password       = random_password.dns02_password.result
+    ssh_public_key = var.cloudinit_ssh_public_key
   }
 }
 
 data "template_file" "dns02_network_config" {
-  count    = var.uninstall ? 0 : 1
+  count    = var.dns02_enabled ? 1 : 0
   template = file("${path.module}/network_config.yml")
 
   vars = {
-    host_ip_address       = "192.168.2.129"
-    gateway_ip_address    = var.cloudinit_gateway_ip_address
-    nameserver_ip_address = var.cloudinit_nameserver_ip_address
+    host_ip_address = "192.168.2.129"
   }
 }
 
 resource "libvirt_cloudinit_disk" "dns02" {
-  provider = libvirt.srv02
-  count    = var.uninstall ? 0 : 1
+  count = var.dns02_enabled ? 1 : 0
 
   name           = "dns02_cloudinit.iso"
   user_data      = data.template_file.dns02_user_data[count.index].rendered
   network_config = data.template_file.dns02_network_config[count.index].rendered
-  pool           = libvirt_pool.srv02.name
+  pool           = libvirt_pool.pool.name
 }
 
 resource "libvirt_domain" "dns02" {
-  provider = libvirt.srv02
-  count    = var.uninstall ? 0 : 1
+  count = var.dns02_enabled ? 1 : 0
 
   name       = "dns02"
   memory     = var.vm_memory
@@ -79,3 +80,4 @@ resource "libvirt_domain" "dns02" {
     target_type = "virtio"
   }
 }
+

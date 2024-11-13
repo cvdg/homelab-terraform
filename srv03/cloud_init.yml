@@ -1,16 +1,17 @@
 #cloud-config
-hostname: ${vm_hostname}
+hostname: ${hostname}
 manage_etc_hosts: false
 ssh_pwauth: false
 disable_root: false
 users:
-  - name: ${cloudinit_username}
-    passwd: ${cloudinit_password}
+  - name: ${username}
+    passwd: ${password}
     lock-passwd: false
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-      - ${cloudinit_ssh_public_key}
+      - ${ssh_public_key}
+
 growpart:
   mode: auto
   devices: ["/"]

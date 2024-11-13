@@ -7,6 +7,10 @@ terraform {
       version = ">= 0.8.1"
     }
 
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.6.3"
+    }
     template = {
       source  = "hashicorp/template"
       version = ">= 2.2.0"
@@ -15,11 +19,5 @@ terraform {
 }
 
 provider "libvirt" {
-  alias = "srv01"
-  uri   = "qemu+ssh://cees@srv01.griend.dev/system"
-}
-
-provider "libvirt" {
-  alias = "srv02"
-  uri   = "qemu+ssh://cees@srv02.griend.dev/system"
+  uri = "qemu:///system"
 }

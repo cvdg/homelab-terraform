@@ -8,7 +8,13 @@ network:
           ipv4: true
           address: ${host_ip_address}
           netmask: 255.255.255.0
-          gateway: ${gateway_ip_address}
+          gateway: 192.168.2.254
           control: auto
         - type: nameserver
-          address: ${nameserver_ip_address}
+          address:
+            - 192.168.2.130
+            - 192.168.2.128
+            - 192.168.2.129
+          search:
+            - griend.dev
+
