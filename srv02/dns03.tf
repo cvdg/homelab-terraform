@@ -75,7 +75,7 @@ resource "libvirt_domain" "dns03" {
 
   console {
     type        = "pty"
-    target_port = "3"
+    target_port = "1"
     target_type = "virtio"
   }
 }

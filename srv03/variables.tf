@@ -41,7 +41,7 @@ variable "vm_size" {
 }
 
 variable "vm_memory" {
-  description = "Memory of the VM (2 GiB)"
+  description = "Memory of the VM (1 GiB)"
   type        = number
   default     = 1 * 1024
 }

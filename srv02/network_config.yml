@@ -12,9 +12,8 @@ network:
           control: auto
         - type: nameserver
           address:
-            - 192.168.2.130
             - 192.168.2.128
             - 192.168.2.129
+            - 192.168.2.130
           search:
             - griend.dev
-

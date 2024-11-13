@@ -1,21 +1,28 @@
 #cloud-config
-hostname: ${hostname}
+hostname: ${vm_hostname}
 manage_etc_hosts: false
 ssh_pwauth: false
 disable_root: false
 users:
-  - name: ${username}
-    passwd: ${password}
+  - name: ${cloudinit_username}
+    passwd: ${cloudinit_password}
     lock-passwd: false
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-      - ${ssh_public_key}
-
+      - ${cloudinit_ssh_public_key}
 growpart:
   mode: auto
   devices: ["/"]
   ignore_growroot_disabled: false
+
+%{if swapsize >= 0 }
+# Create swap partition
+swap:
+  filename: /.swapfile
+  size: "auto"
+  maxsize: ${swapsize}G
+%{ endif }
 
 package_update: true
 package_upgrade: true
