@@ -7,9 +7,8 @@ resource "libvirt_volume" "dns02" {
 }
 
 resource "random_password" "dns02_password" {
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  length  = 12
+  special = false
 }
 
 data "template_file" "dns02_user_data" {

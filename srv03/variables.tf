@@ -57,17 +57,12 @@ variable "domainname" {
   default = "griend.dev"
 }
 
-variable "dns_count" {
-  type    = number
-  default = 1
-}
-
-variable "gitlab_count" {
-  type    = number
-  default = 1
-}
-
 variable "dns02_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "media01_enabled" {
   type    = bool
   default = true
 }
