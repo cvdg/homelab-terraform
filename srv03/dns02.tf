@@ -3,12 +3,7 @@ resource "libvirt_volume" "dns02" {
   name           = "dns02.qcow2"
   pool           = libvirt_pool.pool.name
   base_volume_id = libvirt_volume.base.id
-  size           = var.vm_size
-}
-
-resource "random_password" "dns02_password" {
-  length  = 12
-  special = false
+  size           = var.vm_size_16GB
 }
 
 data "template_file" "dns02_user_data" {
@@ -18,7 +13,7 @@ data "template_file" "dns02_user_data" {
   vars = {
     hostname       = "dns02.${var.domainname}"
     username       = var.cloudinit_username
-    password       = random_password.dns02_password.result
+    password       = random_password.password.result
     ssh_public_key = var.cloudinit_ssh_public_key
     swapsize       = 2
   }
@@ -46,7 +41,7 @@ resource "libvirt_domain" "dns02" {
   count = var.dns02_enabled ? 1 : 0
 
   name       = "dns02"
-  memory     = var.vm_memory
+  memory     = var.vm_memory_1GB
   vcpu       = var.vm_cpus
   running    = true
   autostart  = true

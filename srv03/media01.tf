@@ -3,12 +3,7 @@ resource "libvirt_volume" "media01" {
   name           = "media01.qcow2"
   pool           = libvirt_pool.pool.name
   base_volume_id = libvirt_volume.base.id
-  size           = var.vm_size
-}
-
-resource "random_password" "media01_password" {
-  length  = 12
-  special = false
+  size           = var.vm_size_16GB * 4
 }
 
 data "template_file" "media01_user_data" {
@@ -18,9 +13,9 @@ data "template_file" "media01_user_data" {
   vars = {
     hostname       = "media01.${var.domainname}"
     username       = var.cloudinit_username
-    password       = random_password.media01_password.result
+    password       = random_password.password.result
     ssh_public_key = var.cloudinit_ssh_public_key
-    swapsize       = 8
+    swapsize       = 16
   }
 }
 
