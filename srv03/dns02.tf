@@ -1,6 +1,5 @@
 resource "libvirt_volume" "dns02" {
   provider       = libvirt.srv02
-  count          = var.srv02_enable && var.dns02_enable ? 1 : 0
   count          = var.dns02_enabled ? 1 : 0
   name           = "dns02.qcow2"
   pool           = libvirt_pool.pool.name
@@ -14,7 +13,6 @@ resource "random_password" "dns02_password" {
 }
 
 data "template_file" "dns02_user_data" {
-  count    = var.srv02_enable && var.dns02_enable ? 1 : 0
   count    = var.dns02_enabled ? 1 : 0
   template = file("${path.module}/cloud_init.yml")
 
@@ -27,7 +25,6 @@ data "template_file" "dns02_user_data" {
 }
 
 data "template_file" "dns02_network_config" {
-  count    = var.srv02_enable && var.dns02_enable ? 1 : 0
   count    = var.dns02_enabled ? 1 : 0
   template = file("${path.module}/network_config.yml")
 
@@ -83,4 +80,3 @@ resource "libvirt_domain" "dns02" {
     target_type = "virtio"
   }
 }
-
