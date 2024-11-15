@@ -2,15 +2,17 @@
 hostname: ${hostname}
 manage_etc_hosts: false
 ssh_pwauth: false
-disable_root: false
+disable_root: true
+
 users:
   - name: ${username}
-    passwd: ${password}
+    plain_text_passwd: ${password}
     lock-passwd: false
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
       - ${ssh_public_key}
+
 growpart:
   mode: auto
   devices: ["/"]

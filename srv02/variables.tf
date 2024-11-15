@@ -34,13 +34,13 @@ variable "libvirt_pool_path" {
   default     = "/srv/homelab"
 }
 
-variable "vm_size" {
+variable "vm_size_16GB" {
   description = "Size of the VM root partition (16 GiB)"
   type        = number
   default     = 16 * 1024 * 1024 * 1024
 }
 
-variable "vm_memory" {
+variable "vm_memory_1GB" {
   description = "Memory of the VM (2 GiB)"
   type        = number
   default     = 1 * 1024
@@ -58,6 +58,11 @@ variable "domainname" {
 }
 
 variable "dns03_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "admin01_enabled" {
   type    = bool
   default = true
 }

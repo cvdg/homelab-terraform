@@ -1,5 +1,5 @@
-output "dns03_password" {
-  value     = random_password.dns03_password.result
+output "password" {
+  value     = random_password.password.result
   sensitive = true
 }
 
