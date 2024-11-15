@@ -1,5 +1,4 @@
 resource "libvirt_volume" "dns02" {
-  provider       = libvirt.srv02
   count          = var.dns02_enabled ? 1 : 0
   name           = "dns02.qcow2"
   pool           = libvirt_pool.pool.name
@@ -21,6 +20,7 @@ data "template_file" "dns02_user_data" {
     username       = var.cloudinit_username
     password       = random_password.dns02_password.result
     ssh_public_key = var.cloudinit_ssh_public_key
+    swapsize       = 2
   }
 }
 

@@ -11,11 +11,18 @@ users:
     shell: /bin/bash
     ssh_authorized_keys:
       - ${ssh_public_key}
-
 growpart:
   mode: auto
   devices: ["/"]
   ignore_growroot_disabled: false
+
+%{if swapsize >= 0 }
+# Create swap partition
+swap:
+  filename: /.swapfile
+  size: "auto"
+  maxsize: ${swapsize}G
+%{ endif }
 
 package_update: true
 package_upgrade: true

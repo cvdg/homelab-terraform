@@ -3,3 +3,8 @@ output "dns02_password" {
   sensitive = true
 }
 
+output "media01_password" {
+  value     = random_password.media01_password.result
+  sensitive = true
+}
+
