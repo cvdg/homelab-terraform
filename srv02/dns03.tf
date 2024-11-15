@@ -28,7 +28,7 @@ data "template_file" "dns03_network_config" {
   template = file("${path.module}/network_config.yml")
 
   vars = {
-    host_ip_address = "192.168.2.130"
+    host_ip_address = "192.168.2.130/24"
   }
 }
 
