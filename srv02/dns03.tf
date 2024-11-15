@@ -20,6 +20,7 @@ data "template_file" "dns03_user_data" {
     username       = var.cloudinit_username
     password       = random_password.dns03_password.result
     ssh_public_key = var.cloudinit_ssh_public_key
+    swapsize       = 1
   }
 }
 
