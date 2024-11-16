@@ -67,3 +67,13 @@ variable "admin01_enabled" {
   default = true
 }
 
+variable "dev_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "dev_count" {
+  type    = number
+  default = 4
+}
+
